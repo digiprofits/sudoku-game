@@ -256,6 +256,23 @@ select {
   transform: translateY(1px);
 }
 
+.pad__btn--done {
+  color: #94a3b8;
+  background: #f1f5f9;
+  border-color: var(--line);
+  text-decoration: line-through;
+  text-decoration-thickness: 2px;
+  cursor: default;
+}
+
+.pad__btn--done:hover {
+  border-color: var(--line);
+}
+
+.pad__btn--done:active {
+  transform: none;
+}
+
 .pad__actions {
   display: flex;
   gap: 10px;

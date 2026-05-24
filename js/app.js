@@ -33,6 +33,7 @@
   };
 
   const cells = []; // cells[r][c] -> element
+  const padButtons = {}; // digit (1-9) -> number-pad button element
 
   // --- Setup: build the 81 cell elements once ---
   function buildBoard() {
@@ -128,6 +129,8 @@
     if (state.solved || !state.selected) return;
     const { r, c } = state.selected;
     if (state.givens[r][c]) return;
+    // All correct instances of this number are placed — nothing more to add.
+    if (correctCountByDigit()[num] >= SIZE) return;
 
     if (state.notesMode) {
       const set = state.notes[r][c];
@@ -238,6 +241,30 @@
     return conflict;
   }
 
+  // Count correctly placed cells per digit (index 1-9). A digit is "complete"
+  // when its count reaches SIZE (9) — all of it is on the board in the right spots.
+  function correctCountByDigit() {
+    const counts = new Array(SIZE + 1).fill(0);
+    for (let r = 0; r < SIZE; r++) {
+      for (let c = 0; c < SIZE; c++) {
+        const v = state.current[r][c];
+        if (v !== 0 && v === state.solution[r][c]) counts[v]++;
+      }
+    }
+    return counts;
+  }
+
+  // Cross out / disable number-pad buttons for digits that are fully placed.
+  function updateNumberPad(counts) {
+    for (let n = 1; n <= SIZE; n++) {
+      const btn = padButtons[n];
+      if (!btn) continue;
+      const done = counts[n] >= SIZE;
+      btn.classList.toggle("pad__btn--done", done);
+      btn.disabled = done;
+    }
+  }
+
   // --- Render ---
   function render() {
     mistakesEl.textContent = state.mistakes;
@@ -283,6 +310,8 @@
         if (sel && sel.r === r && sel.c === c) cell.classList.add("selected");
       }
     }
+
+    updateNumberPad(correctCountByDigit());
   }
 
   function renderNotes(set) {
@@ -316,6 +345,7 @@
   notesToggleBtn.addEventListener("click", () => setNotesMode(!state.notesMode));
 
   document.querySelectorAll(".pad__btn").forEach((btn) => {
+    padButtons[Number(btn.dataset.num)] = btn;
     btn.addEventListener("click", () =>
       inputNumber(Number(btn.dataset.num))
     );
