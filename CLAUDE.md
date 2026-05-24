@@ -47,7 +47,7 @@ Three scripts, loaded in order from `index.html` (`sudoku.js` before `app.js`):
 - **`css/styles.css`** — board is a CSS grid; 3×3 box separators come from
   thicker borders on cells with specific `data-col`/`data-row` values. Cell
   appearance is driven entirely by classes that `render()` toggles: `given`,
-  `selected`, `peer`, `same-number`, `conflict`, plus a nested `.notes` mini-grid.
+  `selected`, `peer`, `same-number`, `incorrect`, plus a nested `.notes` mini-grid.
 
 ### Key design points
 
@@ -56,10 +56,12 @@ Three scripts, loaded in order from `index.html` (`sudoku.js` before `app.js`):
   `app.js`. Don't reach into the DOM from `sudoku.js`.
 - **`render()` is the single source of UI truth.** To change what the board shows,
   mutate `state` and call `render()` rather than touching cell elements directly.
-- **Mistake counting vs. conflict highlighting are different things.** Conflicts
-  (`computeConflicts`) are duplicate values within a row/col/box and are purely
-  visual. A "mistake" is counted only when a committed value differs from
-  `state.solution` at placement time.
+- **Error highlighting vs. mistake counting are different things.** The
+  `incorrect` class (red) is applied in `render()` to any committed cell whose
+  value differs from `state.solution`; it's recomputed live every render, so it
+  clears as soon as the cell is fixed. A "mistake" is a cumulative tally
+  incremented at placement time when a committed value differs from
+  `state.solution` — erasing/re-entering does not decrement it.
 - **Heavy work happens on New Game.** `generatePuzzle` (especially Hard) runs
   repeated `countSolutions` passes; it's the one compute-bound moment.
 

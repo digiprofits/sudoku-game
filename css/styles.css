@@ -200,7 +200,7 @@ select {
   background: var(--selected);
 }
 
-.cell.conflict {
+.cell.incorrect {
   color: var(--conflict-text);
   background: var(--conflict);
 }

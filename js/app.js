@@ -202,45 +202,6 @@
     }
   }
 
-  // --- Conflict detection: cells whose value duplicates a peer's value ---
-  function computeConflicts() {
-    const conflict = Array.from({ length: SIZE }, () =>
-      new Array(SIZE).fill(false)
-    );
-    const g = state.current;
-
-    const mark = (group) => {
-      const seen = new Map();
-      for (const [r, c] of group) {
-        const v = g[r][c];
-        if (v === 0) continue;
-        if (seen.has(v)) {
-          conflict[r][c] = true;
-          const [pr, pc] = seen.get(v);
-          conflict[pr][pc] = true;
-        } else {
-          seen.set(v, [r, c]);
-        }
-      }
-    };
-
-    for (let r = 0; r < SIZE; r++) {
-      mark(Array.from({ length: SIZE }, (_, c) => [r, c]));
-    }
-    for (let c = 0; c < SIZE; c++) {
-      mark(Array.from({ length: SIZE }, (_, r) => [r, c]));
-    }
-    for (let br = 0; br < SIZE; br += 3) {
-      for (let bc = 0; bc < SIZE; bc += 3) {
-        const group = [];
-        for (let i = 0; i < 3; i++)
-          for (let j = 0; j < 3; j++) group.push([br + i, bc + j]);
-        mark(group);
-      }
-    }
-    return conflict;
-  }
-
   // Count correctly placed cells per digit (index 1-9). A digit is "complete"
   // when its count reaches SIZE (9) — all of it is on the board in the right spots.
   function correctCountByDigit() {
@@ -270,7 +231,6 @@
     mistakesEl.textContent = state.mistakes;
     hintsEl.textContent = state.hintsUsed;
 
-    const conflicts = computeConflicts();
     const sel = state.selected;
     const selVal = sel ? state.current[sel.r][sel.c] : 0;
 
@@ -306,7 +266,10 @@
           }
         }
 
-        if (conflicts[r][c]) cell.classList.add("conflict");
+        // Flag any committed value that doesn't match the solution.
+        if (val !== 0 && val !== state.solution[r][c]) {
+          cell.classList.add("incorrect");
+        }
         if (sel && sel.r === r && sel.c === c) cell.classList.add("selected");
       }
     }
