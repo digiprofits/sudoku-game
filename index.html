@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sudoku</title>
+    <link rel="stylesheet" href="css/styles.css" />
+  </head>
+  <body>
+    <main class="app">
+      <header class="app__header">
+        <h1 class="app__title">Sudoku</h1>
+        <div class="status">
+          <span class="status__item">Time <strong id="timer">00:00</strong></span>
+          <span class="status__item">Mistakes <strong id="mistakes">0</strong></span>
+          <span class="status__item">Hints <strong id="hints">0</strong></span>
+        </div>
+      </header>
+
+      <div class="controls">
+        <label class="controls__group">
+          Difficulty
+          <select id="difficulty">
+            <option value="easy">Easy</option>
+            <option value="medium">Medium</option>
+            <option value="hard">Hard</option>
+          </select>
+        </label>
+        <button id="new-game" class="btn btn--primary">New Game</button>
+      </div>
+
+      <div class="board-wrap">
+        <div id="board" class="board" aria-label="Sudoku board"></div>
+        <div id="overlay" class="overlay hidden">
+          <div class="overlay__card">
+            <h2 class="overlay__title">Puzzle solved!</h2>
+            <p id="overlay-stats" class="overlay__stats"></p>
+            <button id="overlay-new" class="btn btn--primary">New Game</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="pad">
+        <div class="pad__numbers">
+          <button class="pad__btn" data-num="1">1</button>
+          <button class="pad__btn" data-num="2">2</button>
+          <button class="pad__btn" data-num="3">3</button>
+          <button class="pad__btn" data-num="4">4</button>
+          <button class="pad__btn" data-num="5">5</button>
+          <button class="pad__btn" data-num="6">6</button>
+          <button class="pad__btn" data-num="7">7</button>
+          <button class="pad__btn" data-num="8">8</button>
+          <button class="pad__btn" data-num="9">9</button>
+        </div>
+        <div class="pad__actions">
+          <button id="notes-toggle" class="btn" aria-pressed="false">
+            Notes <span class="pill" id="notes-state">Off</span>
+          </button>
+          <button id="erase" class="btn">Erase</button>
+          <button id="hint" class="btn">Hint</button>
+        </div>
+      </div>
+    </main>
+
+    <script src="js/sudoku.js"></script>
+    <script src="js/app.js"></script>
+  </body>
+</html>
