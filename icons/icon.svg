@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <!-- Blue background with rounded corners (safe for maskable use) -->
+  <rect width="512" height="512" rx="80" fill="#2563eb"/>
+
+  <!-- Board area: 392×392 at (60,60) -->
+  <rect x="60" y="60" width="392" height="392" rx="8" fill="rgba(255,255,255,0.08)"/>
+
+  <!-- Outer border -->
+  <rect x="60" y="60" width="392" height="392" rx="8" fill="none" stroke="white" stroke-width="10"/>
+
+  <!-- Major box-separator lines (thick) -->
+  <!-- Vertical: at x=191 and x=321 (divide 392 into three 130.7px boxes) -->
+  <line x1="191" y1="60"  x2="191" y2="452" stroke="white" stroke-width="8"/>
+  <line x1="321" y1="60"  x2="321" y2="452" stroke="white" stroke-width="8"/>
+  <!-- Horizontal: at y=191 and y=321 -->
+  <line x1="60"  y1="191" x2="452" y2="191" stroke="white" stroke-width="8"/>
+  <line x1="60"  y1="321" x2="452" y2="321" stroke="white" stroke-width="8"/>
+
+  <!-- Inner cell lines (faint) — each box divided into 3 cells (43.6px each) -->
+  <!-- Vertical inner: 60+43.6=104, 60+87.1=147 | 191+43.6=235, 191+87.1=278 | 321+43.6=365, 321+87.1=408 -->
+  <line x1="104" y1="60"  x2="104" y2="452" stroke="white" stroke-width="2" opacity="0.35"/>
+  <line x1="147" y1="60"  x2="147" y2="452" stroke="white" stroke-width="2" opacity="0.35"/>
+  <line x1="235" y1="60"  x2="235" y2="452" stroke="white" stroke-width="2" opacity="0.35"/>
+  <line x1="278" y1="60"  x2="278" y2="452" stroke="white" stroke-width="2" opacity="0.35"/>
+  <line x1="365" y1="60"  x2="365" y2="452" stroke="white" stroke-width="2" opacity="0.35"/>
+  <line x1="408" y1="60"  x2="408" y2="452" stroke="white" stroke-width="2" opacity="0.35"/>
+  <!-- Horizontal inner -->
+  <line x1="60"  y1="104" x2="452" y2="104" stroke="white" stroke-width="2" opacity="0.35"/>
+  <line x1="60"  y1="147" x2="452" y2="147" stroke="white" stroke-width="2" opacity="0.35"/>
+  <line x1="60"  y1="235" x2="452" y2="235" stroke="white" stroke-width="2" opacity="0.35"/>
+  <line x1="60"  y1="278" x2="452" y2="278" stroke="white" stroke-width="2" opacity="0.35"/>
+  <line x1="60"  y1="365" x2="452" y2="365" stroke="white" stroke-width="2" opacity="0.35"/>
+  <line x1="60"  y1="408" x2="452" y2="408" stroke="white" stroke-width="2" opacity="0.35"/>
+
+  <!-- Sample digits — cell centers at (60 + (col+0.5)*43.6, 60 + (row+0.5)*43.6) -->
+  <!-- r0c0=(82,82)  r1c4=(256,126)  r2c8=(430,170)  r4c2=(170,256)  r6c5=(300,344)  r8c1=(126,430) -->
+  <text x="82"  y="82"  dominant-baseline="central" text-anchor="middle" font-family="system-ui,-apple-system,Segoe UI,Roboto,sans-serif" font-weight="800" font-size="30" fill="white">5</text>
+  <text x="256" y="126" dominant-baseline="central" text-anchor="middle" font-family="system-ui,-apple-system,Segoe UI,Roboto,sans-serif" font-weight="800" font-size="30" fill="white">3</text>
+  <text x="430" y="170" dominant-baseline="central" text-anchor="middle" font-family="system-ui,-apple-system,Segoe UI,Roboto,sans-serif" font-weight="800" font-size="30" fill="white">7</text>
+  <text x="170" y="256" dominant-baseline="central" text-anchor="middle" font-family="system-ui,-apple-system,Segoe UI,Roboto,sans-serif" font-weight="800" font-size="30" fill="white">9</text>
+  <text x="300" y="344" dominant-baseline="central" text-anchor="middle" font-family="system-ui,-apple-system,Segoe UI,Roboto,sans-serif" font-weight="800" font-size="30" fill="white">4</text>
+  <text x="126" y="430" dominant-baseline="central" text-anchor="middle" font-family="system-ui,-apple-system,Segoe UI,Roboto,sans-serif" font-weight="800" font-size="30" fill="white">2</text>
+</svg>
